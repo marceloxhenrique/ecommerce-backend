@@ -1,5 +1,6 @@
 package com.api.ecommerce.dtos;
 
+
 import java.util.List;
 
 import com.api.ecommerce.enums.Colors;
@@ -13,5 +14,5 @@ public class VariantDto {
   @NotNull(message = "Vairant color is required")
   private Colors color;
   @NotEmpty(message = "Variant size/stock is required")
-  private List<SizeStockDto> sizeStockDto;
+  private List<SizeStockDto> sizeStock;
 }

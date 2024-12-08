@@ -13,28 +13,40 @@ public class ProductDto {
   
   @NotBlank(message = "Product code is required")
   private String code;
+
   @NotBlank(message = "Product name is required")
   private String name;
+
   @NotBlank(message = "Product title is required")
   private String title;
+
   @NotBlank(message = "Product description is required")
   private String description;
+
   @NotEmpty(message = "Product variant is required")
   private List<VariantDto> variants;
+
   @NotEmpty(message = "Product details is required")
   private List<String> details;
+
   @NotEmpty(message = "Product features is required")
   private List<String> features;
+
   @NotNull(message = "Product price is required")
   private Float price;
+
   @NotBlank(message = "Product category is required")
   private String category;
+
   @NotBlank(message = "Product image is required")
   private String image;
+
   @NotNull(message = "Product create date is required")
   private LocalDateTime createdAt;
+
   @NotNull(message = "Product update is required")
   private LocalDateTime updatedAt;
+
   @NotNull(message = "Product discount is required")
   private Float discount;
 }

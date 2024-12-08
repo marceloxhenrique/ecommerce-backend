@@ -8,6 +8,7 @@ import lombok.Data;
 public class SizeStockDto {
   @NotBlank(message = "Size of product is required")
   private String size;
+  
   @NotNull(message = "Stock of product is required")
   private int stock;
 }
