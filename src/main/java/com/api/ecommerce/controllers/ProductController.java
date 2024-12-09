@@ -46,7 +46,7 @@ public class ProductController {
       return ResponseEntity.status(HttpStatus.CREATED).body("Product created successfully");
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating product: " + e.getMessage());
-    } 
+    }  
   }
 
   @GetMapping
