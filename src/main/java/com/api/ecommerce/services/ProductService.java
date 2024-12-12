@@ -1,5 +1,6 @@
 package com.api.ecommerce.services;
 
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.api.ecommerce.dtos.ProductDto;
@@ -43,11 +45,12 @@ public class ProductService {
   
   @Transactional
   public Product save(Product product){
+    this.validateProduct(product);
     return this.productRepository.save(product);
   }
 
-  
   public void saveProduct(ProductDto productRequest){
+    this.validateProduct(productRequest);
     Product product = new Product();
     BeanUtils.copyProperties(productRequest, product);
     product.setCreatedAt(LocalDateTime.now(ZoneId.of("UTC")));
@@ -60,14 +63,28 @@ public class ProductService {
       variantEntity.setColor(variantRequest.getColor());
       Variant savedVariant = variantRepository.save(variantEntity);
 
-    variantRequest.getSizeStock().forEach(sizeStockRequest -> {
-      SizeStock sizeStockEntity = new SizeStock();
-      sizeStockEntity.setVariant(savedVariant);
-      sizeStockEntity.setSize(sizeStockRequest.getSize());
-      sizeStockEntity.setStock(sizeStockRequest.getStock());
-      sizeStockRepository.save(sizeStockEntity);
+      variantRequest.getSizeStock().forEach(sizeStockRequest -> {
+        SizeStock sizeStockEntity = new SizeStock();
+        sizeStockEntity.setVariant(savedVariant);
+        sizeStockEntity.setSize(sizeStockRequest.getSize());
+        sizeStockEntity.setStock(sizeStockRequest.getStock());
+        sizeStockRepository.save(sizeStockEntity);
+        });
     });
-    });
+  }
+
+  private <T> void validateProduct(T entity){
+    for(Field field: entity.getClass().getDeclaredFields()){
+      field.setAccessible(true);
+      try {
+        Object value = field.get(entity);
+        if(value == null){
+          throw new DataIntegrityViolationException(field.getName() + " cannot be null or empty");
+        }
+      } catch (IllegalAccessException e) {
+        throw new RuntimeException(e);
+      }
+    }
   }
 
   public Optional<Product> findProductById(UUID productId){
