@@ -39,8 +39,7 @@ public class ProductService {
   }
 
   public List<Product> findAll(){
-    List<Product> products = this.productRepository.findAll();
-    return products;
+      return this.productRepository.findAll();
   }
   
   @Transactional
@@ -49,7 +48,7 @@ public class ProductService {
     return this.productRepository.save(product);
   }
 
-  public void saveProduct(ProductDto productRequest){
+  public Product saveProduct(ProductDto productRequest){
     this.validateProduct(productRequest);
     Product product = new Product();
     BeanUtils.copyProperties(productRequest, product);
@@ -71,6 +70,8 @@ public class ProductService {
         sizeStockRepository.save(sizeStockEntity);
         });
     });
+
+    return savedProduct;
   }
 
   private <T> void validateProduct(T entity){

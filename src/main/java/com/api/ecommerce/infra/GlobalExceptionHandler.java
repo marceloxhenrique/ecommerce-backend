@@ -1,4 +1,4 @@
-package com.api.ecommerce;
+package com.api.ecommerce.infra;
 
 import java.util.List;
 import java.util.stream.Collectors;
