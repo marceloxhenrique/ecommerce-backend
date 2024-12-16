@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
 @RestController
 @RequestMapping("/api/products")
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -89,5 +88,4 @@ public class ProductController {
       Product productUpdate = this.productService.save(product);
       return ResponseEntity.status(HttpStatus.OK).body(productUpdate);
   }
-  
 }
