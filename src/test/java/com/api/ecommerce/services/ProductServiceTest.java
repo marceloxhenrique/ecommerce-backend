@@ -137,4 +137,5 @@ public class ProductServiceTest {
     assertThat(productList.size()).isEqualTo(2);
     assertThat(productList.get(0).getCode()).isEqualTo("PRD1234");
   }
+  
 }
