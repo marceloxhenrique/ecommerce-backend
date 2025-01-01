@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.ecommerce.dtos.AuthenticationDto;
+import com.api.ecommerce.dtos.LoginResponseDto;
 import com.api.ecommerce.dtos.RegisterDto;
+import com.api.ecommerce.infra.TokenService;
 import com.api.ecommerce.models.User;
 import com.api.ecommerce.repositories.UserRepository;
 
@@ -22,6 +24,8 @@ import jakarta.validation.Valid;
 public class AuthenticationController {
   @Autowired
   private AuthenticationManager authenticationManager;
+  @Autowired
+  private TokenService tokenService;
 
   @Autowired
   private UserRepository userRepository;
@@ -29,9 +33,11 @@ public class AuthenticationController {
   @PostMapping("/login")
   public ResponseEntity<Object> login(@RequestBody @Valid AuthenticationDto data){
     var emailPassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-    this.authenticationManager.authenticate(emailPassword);
+    var auth = this.authenticationManager.authenticate(emailPassword);
 
-    return ResponseEntity.ok("Login successful");
+    var token = tokenService.generateToken((User) auth.getPrincipal());
+
+    return ResponseEntity.ok(new LoginResponseDto(token));
   }
 
   @PostMapping("/register")

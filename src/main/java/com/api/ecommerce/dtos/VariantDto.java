@@ -1,6 +1,5 @@
 package com.api.ecommerce.dtos;
 
-
 import java.util.List;
 
 import com.api.ecommerce.enums.Colors;
