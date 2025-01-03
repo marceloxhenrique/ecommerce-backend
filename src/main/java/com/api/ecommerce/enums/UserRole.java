@@ -1,8 +1,8 @@
 package com.api.ecommerce.enums;
 
 public enum UserRole {
-  ADMIN("ROLE_ADMIN"),
-  USER("ROLE_USER");
+  ADMIN("admin"),
+  USER("user");
   
   private String role;
   

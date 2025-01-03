@@ -25,21 +25,20 @@ public class AuthenticationController {
   @Autowired
   private AuthenticationManager authenticationManager;
   @Autowired
-  private TokenService tokenService;
-
-  @Autowired
   private UserRepository userRepository;
+  @Autowired
+  private TokenService tokenService;
   
+
   @PostMapping("/login")
   public ResponseEntity<Object> login(@RequestBody @Valid AuthenticationDto data){
+    
     var emailPassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
     var auth = this.authenticationManager.authenticate(emailPassword);
-
     var token = tokenService.generateToken((User) auth.getPrincipal());
-
+    
     return ResponseEntity.ok(new LoginResponseDto(token));
   }
-
   @PostMapping("/register")
   public ResponseEntity<User> regsiter(@RequestBody @Valid RegisterDto data){
     if(this.userRepository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
@@ -48,5 +47,7 @@ public class AuthenticationController {
     User newUser = new User(data.username(), data.email(), encryptedPassword, data.role());
     this.userRepository.save(newUser);
     return ResponseEntity.ok().build();
+
+    
   }
 }

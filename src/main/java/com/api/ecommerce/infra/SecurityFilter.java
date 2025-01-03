@@ -2,7 +2,7 @@ package com.api.ecommerce.infra;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,15 +18,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter{
-  @Autowired
+  
   TokenService tokenService;
-  @Autowired
   UserRepository userRepository;
+  public SecurityFilter (TokenService tokenService, UserRepository userRepository){
+    this.tokenService = tokenService;
+    this.userRepository = userRepository;
+  }
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+  protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
       throws ServletException, IOException {
-      var token = this.recoverToken(request);
+      String token = this.recoverToken(request);
       if(token != null){
         var email = tokenService.validateToken(token);
         UserDetails user = userRepository.findByEmail(email);
@@ -39,7 +42,7 @@ public class SecurityFilter extends OncePerRequestFilter{
   private String recoverToken(HttpServletRequest request){
     var authHeader = request.getHeader("Authorization");
     if(authHeader == null) return null;
-    return authHeader.replace("Bearer", "");
+    return authHeader.replace("Bearer ", "");
   }
 
 }
