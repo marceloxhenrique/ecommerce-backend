@@ -33,19 +33,20 @@ public class TokenService {
   }
 
   private Instant genExpirationData(){
-    return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("+01:00"));
+    return LocalDateTime.now().plusHours(4).toInstant(ZoneOffset.UTC);
   }
 
   public String validateToken(String token){
     try {
       Algorithm algorithm = Algorithm.HMAC256(this.secret);
-      return JWT.require(algorithm)
-        .withIssuer("auth0")
-        .build()
-        .verify(token)
-        .getSubject();
-      
+      String subject = JWT.require(algorithm)
+      .withIssuer("auth0")
+      .build()
+      .verify(token)
+      .getSubject();
+      return subject;
     } catch (JWTVerificationException e) {
+      System.out.println("JWT verification failed: " + e.getMessage());
       return "";
     }
   }
