@@ -29,9 +29,6 @@ public class ProductDto {
   @NotEmpty(message = "Product details is required")
   private List<String> details;
 
-  @NotEmpty(message = "Product features is required")
-  private List<String> features;
-
   @NotNull(message = "Product price is required")
   private Float price;
 

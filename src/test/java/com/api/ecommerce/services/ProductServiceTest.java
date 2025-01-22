@@ -51,10 +51,6 @@ public class ProductServiceTest {
     detailsTest.add("One detail");
     detailsTest.add("Two details");
 
-    ArrayList<String> featureTest = new ArrayList<>();
-    featureTest.add("One feature");
-    featureTest.add("Two features");
-
     List<SizeStockDto> sizeStockList = new ArrayList<>();
     SizeStockDto sizeStockDto = new SizeStockDto();
     sizeStockDto.setSize("45");
@@ -73,7 +69,6 @@ public class ProductServiceTest {
     productTest.setDescription("My description");
     productTest.setVariants(variantsList);
     productTest.setDetails(detailsTest);
-    productTest.setFeatures(featureTest);
     productTest.setPrice((float) 150.99);
     productTest.setCategory("Running shoew");
     productTest.setImage("shoes1.png");
