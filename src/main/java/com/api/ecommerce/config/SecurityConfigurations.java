@@ -1,5 +1,7 @@
 package com.api.ecommerce.config;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,14 +31,23 @@ public class SecurityConfigurations {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     return httpSecurity.csrf(csrf -> csrf.disable())
+      .cors(cors -> cors.configurationSource(request -> {
+            var config = new org.springframework.web.cors.CorsConfiguration();
+            config.setAllowedOrigins(List.of("http://localhost:4200"));
+            config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+            config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
+            config.setAllowCredentials(true);
+            return config;
+        }))
       .sessionManagement(seesion -> seesion.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(authorize -> authorize
         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
         .requestMatchers(HttpMethod.GET, urlAPI).permitAll()
+        .requestMatchers(HttpMethod.GET, urlAPI+"/*").permitAll()
         .requestMatchers(HttpMethod.POST, urlAPI).hasRole("ADMIN")
         .requestMatchers(HttpMethod.DELETE, urlAPI).hasRole("ADMIN")
-        .requestMatchers(HttpMethod.PUT, urlAPI).hasRole("ADMIN")
+        .requestMatchers(HttpMethod.PUT, urlAPI+"/*").hasRole("ADMIN")
         .anyRequest().authenticated()
       )
       .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

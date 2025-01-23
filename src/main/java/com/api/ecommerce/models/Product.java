@@ -52,10 +52,6 @@ public class Product implements Serializable{
   @Column(nullable = false)
   private List<String> details;
 
-  @ElementCollection
-  @Column(nullable = false)
-  private List<String> features;
-
   @Column(nullable = false)
   private Float price;
 
