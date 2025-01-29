@@ -1,5 +1,7 @@
 package com.api.ecommerce.dtos;
 
-public record LoginResponseDto(String token) {
+import com.api.ecommerce.enums.UserRole;
+
+public record LoginResponseDto(String token, UserRole role) {
 
 }

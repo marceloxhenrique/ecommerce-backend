@@ -41,8 +41,8 @@ public class SecurityConfigurations {
         }))
       .sessionManagement(seesion -> seesion.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(authorize -> authorize
-        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-        .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/register").permitAll()
         .requestMatchers(HttpMethod.GET, urlAPI).permitAll()
         .requestMatchers(HttpMethod.GET, urlAPI+"/*").permitAll()
         .requestMatchers(HttpMethod.POST, urlAPI).hasRole("ADMIN")
