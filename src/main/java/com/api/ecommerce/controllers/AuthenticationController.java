@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.ecommerce.dtos.AuthenticationDto;
+import com.api.ecommerce.dtos.LoginDto;
 import com.api.ecommerce.dtos.LoginResponseDto;
 import com.api.ecommerce.dtos.RegisterDto;
+import com.api.ecommerce.dtos.UserAuthDto;
 import com.api.ecommerce.enums.UserRole;
 import com.api.ecommerce.infra.TokenService;
 import com.api.ecommerce.models.User;
@@ -29,16 +30,14 @@ public class AuthenticationController {
   private UserRepository userRepository;
   @Autowired
   private TokenService tokenService;
-  
 
   @PostMapping("/login")
-  public ResponseEntity<Object> login(@RequestBody @Valid AuthenticationDto data){
+  public ResponseEntity<Object> login(@RequestBody @Valid LoginDto data){
     var emailPassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-    User user = (User) this.userRepository.findByEmail(data.email());
+    // User user = (User) this.userRepository.findByEmail(data.email());
     var auth = this.authenticationManager.authenticate(emailPassword);
     var token = tokenService.generateToken((User) auth.getPrincipal());
-    
-    return ResponseEntity.ok(new LoginResponseDto(token, user.getRole()));
+    return ResponseEntity.ok(new LoginResponseDto(token));
   }
   @PostMapping("/register")
   public ResponseEntity<User> regsiter(@RequestBody @Valid RegisterDto data){
@@ -48,7 +47,12 @@ public class AuthenticationController {
     User newUser = new User(data.username(), data.email(), encryptedPassword, role);
     this.userRepository.save(newUser);
     return ResponseEntity.ok().build();
-
-    
+  }
+  @PostMapping("/authenticate")
+  public ResponseEntity<Object> authenticate(@RequestBody String token) {
+    var isUserAuthtenticated = this.tokenService.validateToken(token);
+    User user = (User) this.userRepository.findByEmail(isUserAuthtenticated);
+    UserAuthDto userData = new UserAuthDto(user.getId(), user.getUsername(), user.getEmail(), user.getRole()); 
+    return ResponseEntity.ok(userData);
   }
 }
