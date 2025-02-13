@@ -3,6 +3,7 @@ package com.api.ecommerce.config;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -26,14 +27,18 @@ public class SecurityConfigurations {
   @Autowired
   SecurityFilter securityFilter;
 
-  private String urlAPI = "/api/products";
+  @Value("${frontend.url}")
+  private String frontendUrl;
 
+  private String urlAPI = "/api/products";
+  
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    System.out.println("FRONT" + this.frontendUrl);
     return httpSecurity.csrf(csrf -> csrf.disable())
       .cors(cors -> cors.configurationSource(request -> {
             var config = new org.springframework.web.cors.CorsConfiguration();
-            config.setAllowedOrigins(List.of("http://localhost:4200"));
+            config.setAllowedOrigins(List.of(this.frontendUrl));
             config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
             config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
             config.setAllowCredentials(true);
