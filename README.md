@@ -1,5 +1,9 @@
 [JAVA]: https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white
 [SPRING-BOOT]: https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=springboot&logoColor=fff
+[SPRING-SECURITY]: https://img.shields.io/badge/Spring_Security-6DB33F?logo=Spring-Security&logoColor=white
+[POSTGRESQL]: https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white
+[SUPABASE]: https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=fff
+[DOCKER]: https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff
 
 <h1 style="font-weight: bold;">E-Commerce Shoes Store API</h1>
 
@@ -7,8 +11,12 @@
 
 <h2 id="technologies">💻 Technologies</h2>
 
-![Java][JAVA]
-![Spring Boot][SPRING-BOOT]
+![JAVA]
+![SPRING-BOOT]
+![SPRING-SECURITY]
+![POSTGRESQL]
+![SUPABASE]
+![DOCkER]
 
 <h2 id="started">🚀 Getting started</h2>
 
