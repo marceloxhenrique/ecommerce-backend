@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ecommerce</groupId>
 	<artifactId>ecommerce</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>ecommerce</name>
 	<description>REST API for an e-commerce platform</description>
 	<url/>
