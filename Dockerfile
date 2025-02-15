@@ -1,21 +1,18 @@
-FROM ubuntu:latest as build
-
-RUN apt-get update \
-    && apt-get install -y openjdk-17-jdk maven
+FROM maven:3.8.6-amazoncorretto-17 AS build 
 
 WORKDIR /app
 
-COPY . .
+COPY pom.xml .
+COPY src ./src
 
 RUN mvn clean package
 
-FROM openjdk:17-jdk-slim
+FROM amazoncorretto:17-alpine-jdk 
 
 WORKDIR /app
 
-COPY --from=build /app/target/ecommerce-0.0.1.jarr .
+COPY --from=build /app/target/ecommerce-0.0.1.jar /app/
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "/app/ecommerce-0.0.1.jar"]
-
+CMD ["java", "-jar", "ecommerce-0.0.1.jar"]
