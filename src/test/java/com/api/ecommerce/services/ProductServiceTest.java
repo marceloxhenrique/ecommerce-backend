@@ -15,9 +15,10 @@ import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import org.springframework.test.context.ActiveProfiles;
 
@@ -30,7 +31,7 @@ import com.api.ecommerce.repositories.ProductRepository;
 import com.api.ecommerce.repositories.SizeStockRepository;
 import com.api.ecommerce.repositories.VariantRepository;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 @ActiveProfiles("test")
 public class ProductServiceTest {
   @Mock
