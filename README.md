@@ -1,22 +1,17 @@
-[JAVA]: https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white
-[SPRING-BOOT]: https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=springboot&logoColor=fff
-[SPRING-SECURITY]: https://img.shields.io/badge/Spring_Security-6DB33F?logo=Spring-Security&logoColor=white
-[POSTGRESQL]: https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white
-[SUPABASE]: https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=fff
-[DOCKER]: https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff
-
 <h1 style="font-weight: bold;">E-Commerce Shoes Store API</h1>
 
 <p>The E-Commerce Shoes Store API is the server-side application for managing data and processes of an online shoes store. It provides REST APIs to handle core business logic, including product management, user authentication, and order processing.</p>
 
 <h2 id="technologies">💻 Technologies</h2>
 
-![JAVA]
-![SPRING-BOOT]
-![SPRING-SECURITY]
-![POSTGRESQL]
-![SUPABASE]
-![DOCkER]
+![JAVA](https://img.shields.io/badge/Java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![SPRING-BOOT](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=fff)
+![SPRING-SECURITY](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=Spring-Security&logoColor=white)
+![JUNIT5](https://img.shields.io/badge/Junit5-25A162?style=for-the-badge&logo=junit5&logoColor=fff)
+![POSTGRESQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![SUPABASE](https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=fff)
+![DOCKER](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=fff)
+![RENDER](https://img.shields.io/badge/Render-fff?style=for-the-badge&logo=render&logoColor=000)
 
 <h2 id="started">🚀 Getting started</h2>
 
