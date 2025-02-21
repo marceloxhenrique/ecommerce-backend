@@ -52,7 +52,7 @@ public class SecurityConfigurations {
         .requestMatchers(HttpMethod.GET, urlAPI).permitAll()
         .requestMatchers(HttpMethod.GET, urlAPI+"/*").permitAll()
         .requestMatchers(HttpMethod.POST, urlAPI).hasRole("ADMIN")
-        .requestMatchers(HttpMethod.DELETE, urlAPI).hasRole("ADMIN")
+        .requestMatchers(HttpMethod.DELETE, urlAPI).hasAnyRole("USER", "ADMIN")
         .requestMatchers(HttpMethod.PUT, urlAPI+"/*").hasRole("ADMIN")
         .anyRequest().authenticated()
       )

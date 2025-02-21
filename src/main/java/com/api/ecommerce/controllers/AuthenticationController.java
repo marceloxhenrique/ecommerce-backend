@@ -55,4 +55,13 @@ public class AuthenticationController {
     UserAuthDto userData = new UserAuthDto(user.getId(), user.getUsername(), user.getEmail(), user.getRole()); 
     return ResponseEntity.ok(userData);
   }
+  
+  @PostMapping("/delete")
+  public ResponseEntity<Object> deleteAccount(@RequestBody String token) {
+    var isUserAuthtenticated = this.tokenService.validateToken(token);
+    User user = (User) this.userRepository.findByEmail(isUserAuthtenticated);
+    this.userRepository.deleteById(user.getId());  
+    return ResponseEntity.ok("User Delete succesfully");
+  }
+  
 }
